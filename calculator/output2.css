@@ -1,0 +1,13 @@
+button{
+    background-color: gray;
+    height: 30px;
+    width: 50px;
+    border-radius: 50px;
+    cursor:default;
+}
+.calc-button-row{
+    margin-top: 5px;
+}
+button:hover{
+    background-color: rgb(107, 107, 107);
+}
