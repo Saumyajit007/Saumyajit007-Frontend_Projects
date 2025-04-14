@@ -1,0 +1,85 @@
+@import url("https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Ramaraja&family=Rubik:ital,wght@0,300..900;1,300..900&family=Teko:wght@300..700&family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-bodoni: "IBM Plex Mono", monospace;
+}
+
+.fc-button {
+  @apply bg-blue-400 hover:bg-gray-200 text-white font-semibold py-2 px-3 rounded border border-gray-300 mr-2 shadow-sm mx-2;
+}
+
+.fc-toolbar-chunk.fc-button-group {
+  @apply rounded-xl;
+}
+
+.fc-header-toolbar.fc-button-group > .fc-today-button {
+  @apply ml-4 bg-amber-300;
+}
+
+.fc-header-toolbar {
+  @apply bg-blue-500 p-4 shadow-md flex items-center justify-between rounded-b-xl;
+}
+
+.fc-toolbar-title {
+  @apply text-xl text-white font-bodoni italic font-bold;
+}
+
+.fc-button.fc-myCustomButton-button {
+  @apply w-full rounded-2xl hover:bg-gray-500 hover:border-gray-500 hover:text-black hover:font-bold transition-all duration-540 opacity-100;
+}
+
+
+
+.fc-col-header-cell {
+  @apply text-green-500 font-bold text-xl;
+}
+
+.fc-col-header {
+  @apply bg-gray-200 border-b border-black rounded-2xl;
+}
+
+.fc-daygrid-day-number .text-sm {
+  @apply font-bold text-xl;
+}
+
+.fc-daygrid-day-frame .fc-scrollgrid-sync-inner {
+  @apply rounded-2xl m-1 bg-gray-600;
+}
+
+.fc-day.fc-day-today {
+  @apply bg-cyan-300; /* Or any Tailwind background color class */
+}
+
+.fc-timegrid-slot.fc-day-today {
+  @apply bg-cyan-300
+}
+.inputstyle{
+  @apply border-1 border-black rounded-lg ml-2 w-[350px] px-2 py-1
+}
+
+@theme {
+  --animate-dropdown: dropdown 1s ease-in-out;
+
+  @keyframes dropdown {
+    0%{
+      top: -600px;
+    }
+
+    100% {
+      top: 110px
+    }
+  }
+}
+
+@theme {
+  --animate-goneup: goneup 1s ease-in-out;
+  @keyframes goneup {
+    0%{
+      top: 110px;
+    }
+    100% {
+      top:-600px;
+    }
+  }
+}
