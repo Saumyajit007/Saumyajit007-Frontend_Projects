@@ -29,7 +29,9 @@
   @apply w-full rounded-2xl hover:bg-gray-500 hover:border-gray-500 hover:text-black hover:font-bold transition-all duration-540 opacity-100;
 }
 
-
+.fc-daygrid-day-frame{
+  @apply bg-gradient-to-b from-gray-300 to-green-200 rounded-2xl border-black border-1
+}
 
 .fc-col-header-cell {
   @apply text-green-500 font-bold text-xl;
@@ -48,12 +50,13 @@
 }
 
 .fc-day.fc-day-today {
-  @apply bg-cyan-300; /* Or any Tailwind background color class */
+  @apply bg-cyan-300; 
 }
 
 .fc-timegrid-slot.fc-day-today {
   @apply bg-cyan-300
 }
+
 .inputstyle{
   @apply border-1 border-black rounded-lg ml-2 w-[350px] px-2 py-1
 }
@@ -67,7 +70,7 @@
     }
 
     100% {
-      top: 110px
+      top: 100px
     }
   }
 }

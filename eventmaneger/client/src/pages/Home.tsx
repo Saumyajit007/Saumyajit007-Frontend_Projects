@@ -9,7 +9,8 @@ import toast from 'react-hot-toast';
 import { nanoid } from 'nanoid'
 import { EventInput } from '@fullcalendar/core';
 
-interface BookingInforfation {
+export let dataStorage:any=[]
+export interface BookingInforfation {
     clientName: string,
     email?: string,
     phoneNumber: string,
@@ -39,11 +40,11 @@ interface eventInfo extends EventInput {
     allDay?: boolean
 }
 
-export default function Calendar() {
+export default function Home() {
     const emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g
     const phoneNumberRegex = /^[6-9]\d{9}$/
 
-    const [showEventBookBox, setShowEventBookBox] = useState<Boolean>(true)
+    const [showEventBookBox, setShowEventBookBox] = useState<Boolean>(false)
     const [err, setErr] = useState<ErrorMsg>({
         emailMsg: "",
         phoneNumberMsg: "",
@@ -80,6 +81,13 @@ export default function Calendar() {
             return setErr((prev) => ({ ...prev, phoneNumberMsg: "incorrect phoneNumber" }))
         }
 
+        let today=new Date()
+        let currentdate=today.toISOString().slice(0,10)
+
+        if (new Date(userInfo.startDate.slice(0,10)).getTime()<=new Date(currentdate).getTime()) {
+           return toast.error('select a date after today')
+        }   
+
         if (!userInfo.endDate) {
             const trimeDate: string = userInfo.startDate.slice(0, 10)
             setUserInfo((prev) => ({ ...prev, startDate: trimeDate }))
@@ -89,6 +97,7 @@ export default function Calendar() {
             return setErr((prev) => ({ ...prev, dateFormatMsg: "your select end date before start date" }))
         }
 
+
         let color = ""
         if (userInfo.category === "event") {
             color = "#fa44f7"
@@ -97,14 +106,6 @@ export default function Calendar() {
         } else {
             color = "#f6ef18"
         }
-
-        // if (calenderEvents.length>0) {
-        //    calenderEvents.forEach((obj)=>{
-        //     if () {
-                
-        //     }
-        //    }) 
-        // }
 
         setCalenderEvent((prev) => ([...prev, {
             id: nanoid(),
@@ -119,8 +120,8 @@ export default function Calendar() {
             allDay: userInfo.endDate ? false : true
         }]))
 
-        console.log(userInfo)
-        console.log(calenderEvents)
+        dataStorage=[...dataStorage,userInfo]
+
         setUserInfo({
             clientName: "",
             email: "",
@@ -140,11 +141,10 @@ export default function Calendar() {
             {
                 showEventBookBox &&
                 (
-                    <div className={`z-10 absolute top-[110px] left-135 ${showEventBookBox ? "animate-dropdown" : "animate-goneup"}`}>
-                        <div className='w-[400px] h-[600px] rounded-2xl bg-gray-200 shadow-black flex justify-center shadow-xl/30 '>
-
+                    <div className={`z-10 absolute top-[100px] left-135 ${showEventBookBox ? "animate-dropdown" : "animate-goneup"}`}>
+                        <div className='w-[400px] h-[650px] rounded-2xl bg-gray-200 shadow-black flex justify-center shadow-xl/30 '>
                             <form action="" className='mx-2 mt-1'>
-
+                            <div className='flex justify-center '><button className='scale-150 cursor-pointer mb-2 mt-1' onClick={handleCustomButtonClick}>❌</button></div>
                                 <label htmlFor="name" className='font-semibold'>📛Name</label>
                                 <div className=''>
                                     <input
@@ -275,13 +275,13 @@ export default function Calendar() {
                     initialView="dayGridMonth"
                     events={calenderEvents}
                     eventContent={(arg) => (
-                        <div className="text-white rounded p-2 text-xs font-semibold">
+                        <div className="text-black rounded p-2">
                             <b>{arg.event.title}</b>
-                            {arg.event.extendedProps.description && <p className="text-gray-100 text-wrap">{arg.event.extendedProps.description}</p>}
+                            {arg.event.extendedProps.description && <p className="text-gray-600 text-wrap">{arg.event.extendedProps.description}</p>}
                         </div>
                     )}
                     dayCellContent={(arg) => (
-                        <div className="flex justify-center items-center h-full">
+                        <div className="mt-1.5 mr-2">
                             <span className={`text-sm ${arg.isToday ? 'font-bold text-blue-600' : ''}`}>
                                 {arg.dayNumberText}
                             </span>
